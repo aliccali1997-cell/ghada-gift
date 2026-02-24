@@ -5,36 +5,256 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>هدية ❤️</title>
   <style>
-    :root{--bg1:#140c2a;--bg2:#24114a;--card:rgba(255,255,255,.08);--stroke:rgba(255,255,255,.18);--txt:#fff;--muted:rgba(255,255,255,.72);--btn:rgba(255,255,255,.10);--shadow:0 20px 60px rgba(0,0,0,.35);--radius:22px;}
-    *{box-sizing:border-box;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial;}
-    body{margin:0;min-height:100vh;color:var(--txt);background:radial-gradient(900px 500px at 50% 10%,#3c1b7a 0%,transparent 60%),radial-gradient(700px 450px at 15% 80%,#b51b6a33 0%,transparent 62%),linear-gradient(180deg,var(--bg1),var(--bg2));overflow:hidden;}
-    .hearts{position:fixed;inset:0;pointer-events:none;opacity:.25;background-image:radial-gradient(circle at 20% 30%,rgba(255,80,160,.6) 0 2px,transparent 3px),radial-gradient(circle at 70% 20%,rgba(255,80,160,.6) 0 2px,transparent 3px),radial-gradient(circle at 40% 70%,rgba(255,80,160,.6) 0 2px,transparent 3px),radial-gradient(circle at 80% 75%,rgba(255,80,160,.6) 0 2px,transparent 3px);animation:float 8s ease-in-out infinite alternate;}
-    @keyframes float{from{transform:translateY(0)}to{transform:translateY(-18px)}}
-    .wrap{min-height:100vh;display:grid;place-items:center;padding:24px;}
-    .card{width:min(560px,92vw);background:var(--card);border:1px solid var(--stroke);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;backdrop-filter:blur(10px);position:relative;}
-    .title{font-size:34px;font-weight:900;letter-spacing:.4px;text-align:center;margin:6px 0 10px;}
-    .sub{color:var(--muted);text-align:center;margin:0 0 18px;line-height:1.85}
-    .row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-    .btn{border:1px solid var(--stroke);background:var(--btn);color:var(--txt);padding:14px 16px;border-radius:16px;cursor:pointer;transition:.18s transform,.18s opacity;font-size:16px;min-width:200px;text-align:center;user-select:none;}
-    .btn:hover{transform:translateY(-2px);opacity:.95}
-    .btn:active{transform:translateY(0);opacity:.9}
-    .pill{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--stroke);background:rgba(0,0,0,.18);padding:8px 12px;border-radius:999px;margin:0 auto 14px;}
-    .screen{display:none;animation:in .25s ease}
+    :root{
+      --bg1:#140c2a; --bg2:#24114a;
+      --card:rgba(255,255,255,.08);
+      --stroke:rgba(255,255,255,.18);
+      --txt:#fff;
+      --muted:rgba(255,255,255,.72);
+      --btn:rgba(255,255,255,.10);
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box;font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial;}
+    body{
+      margin:0; min-height:100vh; color:var(--txt);
+      background:
+        radial-gradient(900px 500px at 50% 10%, #3c1b7a 0%, transparent 60%),
+        radial-gradient(700px 450px at 15% 80%, #b51b6a33 0%, transparent 62%),
+        linear-gradient(180deg,var(--bg1),var(--bg2));
+      overflow-x:hidden;
+    }
+    .hearts{
+      position:fixed; inset:0; pointer-events:none; opacity:.25;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(255,80,160,.6) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 20%, rgba(255,80,160,.6) 0 2px, transparent 3px),
+        radial-gradient(circle at 40% 70%, rgba(255,80,160,.6) 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 75%, rgba(255,80,160,.6) 0 2px, transparent 3px);
+      animation: float 8s ease-in-out infinite alternate;
+    }
+    @keyframes float { from{transform:translateY(0)} to{transform:translateY(-18px)} }
+
+    .wrap{min-height:100vh; display:grid; place-items:center; padding:24px 24px 96px;}
+    .card{
+      width:min(640px, 92vw);
+      background:var(--card);
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+      backdrop-filter: blur(10px);
+      position:relative;
+    }
+    .title{font-size:34px; font-weight:900; letter-spacing:.4px; text-align:center; margin:6px 0 10px;}
+    .sub{color:var(--muted); text-align:center; margin:0 0 18px; line-height:1.85}
+    .row{display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
+    .btn{
+      border:1px solid var(--stroke);
+      background:var(--btn);
+      color:var(--txt);
+      padding:14px 16px;
+      border-radius:16px;
+      cursor:pointer;
+      transition:.18s transform, .18s opacity;
+      font-size:16px;
+      min-width: 210px;
+      text-align:center;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-2px); opacity:.95}
+    .btn:active{transform: translateY(0px); opacity:.9}
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      border:1px solid var(--stroke);
+      background:rgba(0,0,0,.18);
+      padding:8px 12px;
+      border-radius:999px;
+      margin:0 auto 14px;
+    }
+    .screen{display:none; animation: in .25s ease}
     .screen.active{display:block}
-    @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-    .input{width:100%;background:rgba(0,0,0,.2);border:1px solid var(--stroke);color:var(--txt);padding:14px;border-radius:16px;font-size:16px;outline:none;}
-    .small{font-size:13px;color:var(--muted);text-align:center;margin-top:10px}
-    .note{background:rgba(0,0,0,.18);border:1px solid var(--stroke);border-radius:18px;padding:14px;line-height:1.95;color:rgba(255,255,255,.92);text-align:center;}
-    .topRight{position:absolute;top:14px;left:14px;width:42px;height:42px;border-radius:14px;display:grid;place-items:center;border:1px solid var(--stroke);background:rgba(0,0,0,.18);cursor:pointer;}
-    .loading{position:fixed;inset:0;display:grid;place-items:center;background:radial-gradient(900px 500px at 50% 10%,#3c1b7a 0%,transparent 60%),linear-gradient(180deg,var(--bg1),var(--bg2));z-index:99;transition:opacity .35s ease;}
-    .loaderCard{width:min(420px,88vw);border-radius:24px;border:1px solid var(--stroke);background:rgba(255,255,255,.06);box-shadow:var(--shadow);padding:22px;text-align:center;backdrop-filter:blur(10px);}
-    .ring{width:74px;height:74px;border-radius:999px;margin:6px auto 10px;border:6px solid rgba(255,255,255,.18);border-top-color:rgba(255,255,255,.9);animation:spin .9s linear infinite;}
-    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes in { from{opacity:0; transform: translateY(8px)} to{opacity:1; transform:none} }
+
+    .input{
+      width:100%;
+      background:rgba(0,0,0,.2);
+      border:1px solid var(--stroke);
+      color:var(--txt);
+      padding:14px 14px;
+      border-radius:16px;
+      font-size:16px;
+      outline:none;
+    }
+    .small{font-size:13px; color:var(--muted); text-align:center; margin-top:10px}
+    .note{
+      background:rgba(0,0,0,.18);
+      border:1px solid var(--stroke);
+      border-radius:18px;
+      padding:14px;
+      line-height:1.95;
+      color:rgba(255,255,255,.92);
+      text-align:center;
+    }
+    .topRight{
+      position:absolute; top:14px; left:14px;
+      width:42px; height:42px; border-radius:14px;
+      display:grid; place-items:center;
+      border:1px solid var(--stroke);
+      background:rgba(0,0,0,.18);
+      cursor:pointer;
+    }
+
+    /* Loading */
+    .loading{
+      position:fixed; inset:0;
+      display:grid; place-items:center;
+      background:
+        radial-gradient(900px 500px at 50% 10%, #3c1b7a 0%, transparent 60%),
+        linear-gradient(180deg,var(--bg1),var(--bg2));
+      z-index:99;
+      transition: opacity .35s ease;
+    }
+    .loaderCard{
+      width:min(420px, 88vw);
+      border-radius:24px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.06);
+      box-shadow:var(--shadow);
+      padding:22px;
+      text-align:center;
+      backdrop-filter: blur(10px);
+    }
+    .ring{
+      width:74px; height:74px; border-radius:999px;
+      margin: 6px auto 10px;
+      border:6px solid rgba(255,255,255,.18);
+      border-top-color: rgba(255,255,255,.9);
+      animation: spin .9s linear infinite;
+    }
+    @keyframes spin { to{transform:rotate(360deg)} }
+
+    /* Hearts grid (4 cards) */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+    .hcard{
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.06);
+      border-radius:20px;
+      padding:18px 14px;
+      text-align:center;
+      cursor:pointer;
+      transition:.18s transform, .18s opacity;
+      min-height:110px;
+      display:grid;
+      place-items:center;
+    }
+    .hcard:hover{transform:translateY(-2px); opacity:.95}
+    .hicon{font-size:26px; margin-bottom:6px}
+    .hlabel{font-weight:800; font-size:16px}
+    .modal{
+      position:fixed; inset:0; z-index:200;
+      display:none; place-items:center;
+      background:rgba(0,0,0,.55);
+      padding:18px;
+    }
+    .modal.open{display:grid}
+    .modalBox{
+      width:min(560px, 92vw);
+      border-radius:22px;
+      border:1px solid var(--stroke);
+      background:rgba(20,12,42,.92);
+      box-shadow:var(--shadow);
+      padding:18px;
+      backdrop-filter: blur(10px);
+      text-align:center;
+    }
+    .modalTitle{font-weight:900; font-size:22px; margin:6px 0 10px}
+    .closeBtn{
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.10);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:14px;
+      cursor:pointer;
+      display:inline-block;
+      margin-top:12px;
+    }
+
+    /* Gallery */
+    .gallery{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    .gitem{
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.06);
+      border-radius:22px;
+      overflow:hidden;
+    }
+    .gimg{
+      width:100%;
+      height:min(360px, 52vw);
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.05) contrast(1.02);
+    }
+    .gcap{
+      padding:12px 12px 14px;
+      color:rgba(255,255,255,.9);
+      line-height:1.9;
+      text-align:center;
+    }
+
+    /* Music bar */
+    .musicBar{
+      position:fixed;
+      left:14px; right:14px; bottom:14px;
+      z-index:300;
+      border:1px solid var(--stroke);
+      background:rgba(0,0,0,.22);
+      backdrop-filter: blur(10px);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:10px 12px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      max-width:820px;
+      margin:0 auto;
+    }
+    .mBtn{
+      width:44px; height:44px;
+      border-radius:14px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.10);
+      color:#fff;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      font-size:18px;
+      flex:0 0 auto;
+    }
+    .mInfo{flex:1}
+    .mTitle{font-weight:900}
+    .mSub{color:var(--muted); font-size:12.5px; margin-top:2px}
+    .mRange{
+      width:180px;
+      max-width:32vw;
+    }
+    input[type="range"]{width:100%}
   </style>
 </head>
 <body>
   <div class="hearts"></div>
 
+  <!-- Loading -->
   <div id="loading" class="loading">
     <div class="loaderCard">
       <div class="ring"></div>
@@ -47,6 +267,7 @@
     <div class="card">
       <div class="topRight" onclick="go('home')" title="رجوع">✕</div>
 
+      <!-- 1) الرئيسية -->
       <section id="home" class="screen active">
         <div class="pill">✨ <span>غادة</span> ❤️</div>
         <div class="title">غادة</div>
@@ -57,9 +278,71 @@
           <div class="btn" onclick="go('password')">🔒 رسالة سرّية</div>
         </div>
 
-        <p class="small">افتحي “رسالة سرّية” واكتبي الباسورد 😉</p>
+        <p class="small">وتحت كمان هتلاقي قلوب وصور… انزلي شوية 😉</p>
+
+        <hr style="border:none;border-top:1px solid rgba(255,255,255,.12); margin:18px 0">
+
+        <!-- قلوب مربعة زي الفيديو -->
+        <div class="title" style="font-size:22px;margin:0 0 8px">اختاري قلب 💘</div>
+        <p class="sub" style="margin-bottom:10px">كل قلب وراه كلمة حلوة ليكي</p>
+
+        <div class="grid">
+          <div class="hcard" onclick="openHeart('الأول ❤️','إنتِ أجمل صدفة حصلت في حياتي… ووجودك بيطمنّي.')">
+            <div>
+              <div class="hicon">💗</div>
+              <div class="hlabel">الأول</div>
+            </div>
+          </div>
+
+          <div class="hcard" onclick="openHeart('التاني ✨','أنا بحب تفاصيلك… طريقة كلامك… وضحكتك اللي بتفتح النفس.')">
+            <div>
+              <div class="hicon">💞</div>
+              <div class="hlabel">التاني</div>
+            </div>
+          </div>
+
+          <div class="hcard" onclick="openHeart('التالت 🤍','ربنا يديمك نعمة… ويخلي بينا الود دايمًا، مهما الأيام اتغيرت.')">
+            <div>
+              <div class="hicon">💖</div>
+              <div class="hlabel">التالت</div>
+            </div>
+          </div>
+
+          <div class="hcard" onclick="openHeart('الرابع 🌙','إنتِ مش بس حُب… إنتِ راحة… وسكينة… وأمان.')">
+            <div>
+              <div class="hicon">💘</div>
+              <div class="hlabel">الرابع</div>
+            </div>
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid rgba(255,255,255,.12); margin:18px 0">
+
+        <!-- صور تحت -->
+        <div class="title" style="font-size:22px;margin:0 0 8px">صورنا 📸</div>
+        <p class="sub" style="margin-bottom:10px">لحظات صغيرة… بس غالية عندي جدًا</p>
+
+        <div class="gallery">
+          <!-- غيّر أسماء الصور حسب اللي رفعتها -->
+          <div class="gitem">
+            <img class="gimg" src="p1.jpg" alt="photo 1">
+            <div class="gcap">في كل صورة لينا… بحس إن الدنيا أحن 🤍</div>
+          </div>
+
+          <div class="gitem">
+            <img class="gimg" src="p2.jpg" alt="photo 2">
+            <div class="gcap">ضحكتك هنا… كانت كفاية تخلّي اليوم كله عيد ❤️</div>
+          </div>
+
+          <div class="gitem">
+            <img class="gimg" src="p3.jpg" alt="photo 3">
+            <div class="gcap">أنا بحب إننا “إحنا”… وبس 💗</div>
+          </div>
+        </div>
+
       </section>
 
+      <!-- 2) تاريخ أول مرة -->
       <section id="firstMeet" class="screen">
         <div class="title">أول مرة اتقابلنا</div>
         <div class="note">
@@ -75,6 +358,7 @@
         </div>
       </section>
 
+      <!-- 3) الباسورد + الرسالة -->
       <section id="password" class="screen">
         <div class="title">جاهزة؟ ✨</div>
         <p class="sub">اكتبي الباسورد علشان تفتحي الرسالة</p>
@@ -100,9 +384,33 @@
     </div>
   </div>
 
+  <!-- Modal for hearts -->
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <div class="modalBox">
+      <div id="mTitle" class="modalTitle"></div>
+      <div id="mText" class="note" style="margin-top:10px"></div>
+      <div class="closeBtn" onclick="closeModal()">إغلاق</div>
+    </div>
+  </div>
+
+  <!-- Music bar -->
+  <div class="musicBar">
+    <button id="playBtn" class="mBtn" title="تشغيل/إيقاف">▶</button>
+    <div class="mInfo">
+      <div class="mTitle">موسيقى صغيرة 🎶</div>
+      <div class="mSub">اضغطي تشغيل… وخلي اللحظة أحلى</div>
+    </div>
+    <div class="mRange">
+      <input id="vol" type="range" min="0" max="100" value="70" />
+    </div>
+  </div>
+
+  <audio id="audio" src="song.mp3" preload="auto"></audio>
+
   <script>
     const SECRET = "1234";
 
+    // Loading effect
     window.addEventListener('load', () => {
       setTimeout(() => {
         const loading = document.getElementById('loading');
@@ -110,7 +418,7 @@
         loading.style.opacity = '0';
         app.style.opacity = '1';
         setTimeout(() => loading.remove(), 400);
-      }, 1500);
+      }, 1200);
     });
 
     function go(id){
@@ -135,6 +443,48 @@
         document.getElementById('letter').style.display = 'none';
       }
     }
+
+    // Hearts modal
+    function openHeart(title, text){
+      document.getElementById('mTitle').textContent = title;
+      document.getElementById('mText').textContent = text;
+      document.getElementById('modal').classList.add('open');
+    }
+    function closeModal(e){
+      // لو ضغط على الخلفية (مش الصندوق) يقفل
+      if(!e || e.target.id === 'modal'){
+        document.getElementById('modal').classList.remove('open');
+      }
+    }
+
+    // Music controls
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('playBtn');
+    const vol = document.getElementById('vol');
+
+    audio.volume = 0.7;
+
+    playBtn.addEventListener('click', async () => {
+      try{
+        if(audio.paused){
+          await audio.play();
+          playBtn.textContent = "⏸";
+        }else{
+          audio.pause();
+          playBtn.textContent = "▶";
+        }
+      }catch(err){
+        alert("لو الموبايل منع التشغيل التلقائي: اضغطي زر التشغيل مرة كمان 😊");
+      }
+    });
+
+    vol.addEventListener('input', () => {
+      audio.volume = (Number(vol.value) / 100);
+    });
+
+    audio.addEventListener('ended', () => {
+      playBtn.textContent = "▶";
+    });
   </script>
 </body>
 </html>
