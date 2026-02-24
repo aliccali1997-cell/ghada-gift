@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>هدية ❤️</title>
+  <style>
+    :root{--bg1:#140c2a;--bg2:#24114a;--card:rgba(255,255,255,.08);--stroke:rgba(255,255,255,.18);--txt:#fff;--muted:rgba(255,255,255,.72);--btn:rgba(255,255,255,.10);--shadow:0 20px 60px rgba(0,0,0,.35);--radius:22px;}
+    *{box-sizing:border-box;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial;}
+    body{margin:0;min-height:100vh;color:var(--txt);background:radial-gradient(900px 500px at 50% 10%,#3c1b7a 0%,transparent 60%),radial-gradient(700px 450px at 15% 80%,#b51b6a33 0%,transparent 62%),linear-gradient(180deg,var(--bg1),var(--bg2));overflow:hidden;}
+    .hearts{position:fixed;inset:0;pointer-events:none;opacity:.25;background-image:radial-gradient(circle at 20% 30%,rgba(255,80,160,.6) 0 2px,transparent 3px),radial-gradient(circle at 70% 20%,rgba(255,80,160,.6) 0 2px,transparent 3px),radial-gradient(circle at 40% 70%,rgba(255,80,160,.6) 0 2px,transparent 3px),radial-gradient(circle at 80% 75%,rgba(255,80,160,.6) 0 2px,transparent 3px);animation:float 8s ease-in-out infinite alternate;}
+    @keyframes float{from{transform:translateY(0)}to{transform:translateY(-18px)}}
+    .wrap{min-height:100vh;display:grid;place-items:center;padding:24px;}
+    .card{width:min(560px,92vw);background:var(--card);border:1px solid var(--stroke);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;backdrop-filter:blur(10px);position:relative;}
+    .title{font-size:34px;font-weight:900;letter-spacing:.4px;text-align:center;margin:6px 0 10px;}
+    .sub{color:var(--muted);text-align:center;margin:0 0 18px;line-height:1.85}
+    .row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    .btn{border:1px solid var(--stroke);background:var(--btn);color:var(--txt);padding:14px 16px;border-radius:16px;cursor:pointer;transition:.18s transform,.18s opacity;font-size:16px;min-width:200px;text-align:center;user-select:none;}
+    .btn:hover{transform:translateY(-2px);opacity:.95}
+    .btn:active{transform:translateY(0);opacity:.9}
+    .pill{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--stroke);background:rgba(0,0,0,.18);padding:8px 12px;border-radius:999px;margin:0 auto 14px;}
+    .screen{display:none;animation:in .25s ease}
+    .screen.active{display:block}
+    @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .input{width:100%;background:rgba(0,0,0,.2);border:1px solid var(--stroke);color:var(--txt);padding:14px;border-radius:16px;font-size:16px;outline:none;}
+    .small{font-size:13px;color:var(--muted);text-align:center;margin-top:10px}
+    .note{background:rgba(0,0,0,.18);border:1px solid var(--stroke);border-radius:18px;padding:14px;line-height:1.95;color:rgba(255,255,255,.92);text-align:center;}
+    .topRight{position:absolute;top:14px;left:14px;width:42px;height:42px;border-radius:14px;display:grid;place-items:center;border:1px solid var(--stroke);background:rgba(0,0,0,.18);cursor:pointer;}
+    .loading{position:fixed;inset:0;display:grid;place-items:center;background:radial-gradient(900px 500px at 50% 10%,#3c1b7a 0%,transparent 60%),linear-gradient(180deg,var(--bg1),var(--bg2));z-index:99;transition:opacity .35s ease;}
+    .loaderCard{width:min(420px,88vw);border-radius:24px;border:1px solid var(--stroke);background:rgba(255,255,255,.06);box-shadow:var(--shadow);padding:22px;text-align:center;backdrop-filter:blur(10px);}
+    .ring{width:74px;height:74px;border-radius:999px;margin:6px auto 10px;border:6px solid rgba(255,255,255,.18);border-top-color:rgba(255,255,255,.9);animation:spin .9s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div class="hearts"></div>
+
+  <div id="loading" class="loading">
+    <div class="loaderCard">
+      <div class="ring"></div>
+      <div style="font-weight:800;font-size:20px;margin-top:6px">جاري التحميل…</div>
+      <div style="color:rgba(255,255,255,.72);margin-top:6px">لحظة حب صغيرة 💗</div>
+    </div>
+  </div>
+
+  <div class="wrap" style="opacity:0" id="app">
+    <div class="card">
+      <div class="topRight" onclick="go('home')" title="رجوع">✕</div>
+
+      <section id="home" class="screen active">
+        <div class="pill">✨ <span>غادة</span> ❤️</div>
+        <div class="title">غادة</div>
+        <p class="sub">في ناس وجودهم بيخلّي كل حاجة أهدى… وإنتِ منهم 🤍</p>
+
+        <div class="row">
+          <div class="btn" onclick="go('firstMeet')">❤️ أول مرة اتقابلنا</div>
+          <div class="btn" onclick="go('password')">🔒 رسالة سرّية</div>
+        </div>
+
+        <p class="small">افتحي “رسالة سرّية” واكتبي الباسورد 😉</p>
+      </section>
+
+      <section id="firstMeet" class="screen">
+        <div class="title">أول مرة اتقابلنا</div>
+        <div class="note">
+          <div>📅 <b>10/9/2025</b></div>
+          <div style="margin-top:10px">
+            اليوم ده كان بداية لطريق حلو…<br/>
+            من ساعتها وأنا بحس إن في “تفاصيل” بتتحسن لمجرد إنك موجودة ❤️
+          </div>
+        </div>
+        <div class="row" style="margin-top:14px">
+          <div class="btn" onclick="go('home')">↩ رجوع</div>
+          <div class="btn" onclick="go('password')">🔒 روحي للرسالة</div>
+        </div>
+      </section>
+
+      <section id="password" class="screen">
+        <div class="title">جاهزة؟ ✨</div>
+        <p class="sub">اكتبي الباسورد علشان تفتحي الرسالة</p>
+
+        <input id="pw" class="input" type="password" inputmode="numeric" placeholder="الباسورد" />
+
+        <div class="row" style="margin-top:12px">
+          <div class="btn" onclick="checkPw()">افتحي الرسالة 💌</div>
+          <div class="btn" onclick="go('home')">↩ رجوع</div>
+        </div>
+
+        <p id="pwErr" class="small" style="color:#ffd1e7; display:none;">الباسورد غلط 🙈 جرّبي تاني</p>
+
+        <div id="letter" style="display:none; margin-top:14px" class="note">
+          غادة… ❤️<br/>
+          يمكن الكلام عمره ما هيقدر يلمّ كل اللي جوايا، بس أكيد يقدر يقول حاجة مهمة:<br/>
+          إنتِ غالية… وقريبة… ووجودك بيطمنّي.<br/><br/>
+          أنا ممتن لكل لحظة جمعتنا، ولكل مرة ضحكنا فيها من القلب…<br/>
+          وربنا يديمك نعمة في حياتي، ويديم بينا الود والفرح دايمًا 🤍
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+    const SECRET = "1234";
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loading = document.getElementById('loading');
+        const app = document.getElementById('app');
+        loading.style.opacity = '0';
+        app.style.opacity = '1';
+        setTimeout(() => loading.remove(), 400);
+      }, 1500);
+    });
+
+    function go(id){
+      document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+
+      const err = document.getElementById('pwErr');
+      if(err) err.style.display = 'none';
+      const letter = document.getElementById('letter');
+      if(letter) letter.style.display = 'none';
+      const pw = document.getElementById('pw');
+      if(pw) pw.value = "";
+    }
+
+    function checkPw(){
+      const v = (document.getElementById('pw').value || "").trim();
+      if(v === SECRET){
+        document.getElementById('pwErr').style.display = 'none';
+        document.getElementById('letter').style.display = 'block';
+      } else {
+        document.getElementById('pwErr').style.display = 'block';
+        document.getElementById('letter').style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
