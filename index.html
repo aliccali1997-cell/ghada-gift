@@ -2,489 +2,930 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>هدية ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>غادة</title>
   <style>
     :root{
-      --bg1:#140c2a; --bg2:#24114a;
-      --card:rgba(255,255,255,.08);
-      --stroke:rgba(255,255,255,.18);
-      --txt:#fff;
-      --muted:rgba(255,255,255,.72);
-      --btn:rgba(255,255,255,.10);
-      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --bg1:#0b0a1b;
+      --bg2:#1b1240;
+      --glass: rgba(255,255,255,.08);
+      --glass2: rgba(255,255,255,.12);
+      --text:#ffffff;
+      --muted: rgba(255,255,255,.75);
+      --pink:#ff4fa3;
+      --pink2:#ff7ac7;
+      --stroke: rgba(255,122,199,.55);
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
       --radius: 22px;
     }
-    *{box-sizing:border-box;font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial;}
+    *{box-sizing:border-box}
     body{
-      margin:0; min-height:100vh; color:var(--txt);
-      background:
-        radial-gradient(900px 500px at 50% 10%, #3c1b7a 0%, transparent 60%),
-        radial-gradient(700px 450px at 15% 80%, #b51b6a33 0%, transparent 62%),
-        linear-gradient(180deg,var(--bg1),var(--bg2));
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial;
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 50% 20%, rgba(255,79,163,.25), transparent 55%),
+                  radial-gradient(900px 700px at 20% 70%, rgba(120,90,255,.25), transparent 60%),
+                  linear-gradient(160deg, var(--bg1), var(--bg2));
+      min-height:100vh;
       overflow-x:hidden;
     }
+    a{color:inherit}
+    .hidden{display:none !important}
+
+    /* floating hearts */
     .hearts{
-      position:fixed; inset:0; pointer-events:none; opacity:.25;
-      background-image:
-        radial-gradient(circle at 20% 30%, rgba(255,80,160,.6) 0 2px, transparent 3px),
-        radial-gradient(circle at 70% 20%, rgba(255,80,160,.6) 0 2px, transparent 3px),
-        radial-gradient(circle at 40% 70%, rgba(255,80,160,.6) 0 2px, transparent 3px),
-        radial-gradient(circle at 80% 75%, rgba(255,80,160,.6) 0 2px, transparent 3px);
-      animation: float 8s ease-in-out infinite alternate;
-    }
-    @keyframes float { from{transform:translateY(0)} to{transform:translateY(-18px)} }
-
-    .wrap{min-height:100vh; display:grid; place-items:center; padding:24px 24px 96px;}
-    .card{
-      width:min(640px, 92vw);
-      background:var(--card);
-      border:1px solid var(--stroke);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:22px;
-      backdrop-filter: blur(10px);
-      position:relative;
-    }
-    .title{font-size:34px; font-weight:900; letter-spacing:.4px; text-align:center; margin:6px 0 10px;}
-    .sub{color:var(--muted); text-align:center; margin:0 0 18px; line-height:1.85}
-    .row{display:flex; gap:12px; flex-wrap:wrap; justify-content:center}
-    .btn{
-      border:1px solid var(--stroke);
-      background:var(--btn);
-      color:var(--txt);
-      padding:14px 16px;
-      border-radius:16px;
-      cursor:pointer;
-      transition:.18s transform, .18s opacity;
-      font-size:16px;
-      min-width: 210px;
-      text-align:center;
-      user-select:none;
-    }
-    .btn:hover{transform: translateY(-2px); opacity:.95}
-    .btn:active{transform: translateY(0px); opacity:.9}
-    .pill{
-      display:inline-flex; gap:8px; align-items:center;
-      border:1px solid var(--stroke);
-      background:rgba(0,0,0,.18);
-      padding:8px 12px;
-      border-radius:999px;
-      margin:0 auto 14px;
-    }
-    .screen{display:none; animation: in .25s ease}
-    .screen.active{display:block}
-    @keyframes in { from{opacity:0; transform: translateY(8px)} to{opacity:1; transform:none} }
-
-    .input{
-      width:100%;
-      background:rgba(0,0,0,.2);
-      border:1px solid var(--stroke);
-      color:var(--txt);
-      padding:14px 14px;
-      border-radius:16px;
-      font-size:16px;
-      outline:none;
-    }
-    .small{font-size:13px; color:var(--muted); text-align:center; margin-top:10px}
-    .note{
-      background:rgba(0,0,0,.18);
-      border:1px solid var(--stroke);
-      border-radius:18px;
-      padding:14px;
-      line-height:1.95;
-      color:rgba(255,255,255,.92);
-      text-align:center;
-    }
-    .topRight{
-      position:absolute; top:14px; left:14px;
-      width:42px; height:42px; border-radius:14px;
-      display:grid; place-items:center;
-      border:1px solid var(--stroke);
-      background:rgba(0,0,0,.18);
-      cursor:pointer;
-    }
-
-    /* Loading */
-    .loading{
       position:fixed; inset:0;
-      display:grid; place-items:center;
-      background:
-        radial-gradient(900px 500px at 50% 10%, #3c1b7a 0%, transparent 60%),
-        linear-gradient(180deg,var(--bg1),var(--bg2));
-      z-index:99;
-      transition: opacity .35s ease;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:0;
     }
-    .loaderCard{
-      width:min(420px, 88vw);
-      border-radius:24px;
-      border:1px solid var(--stroke);
-      background:rgba(255,255,255,.06);
-      box-shadow:var(--shadow);
-      padding:22px;
-      text-align:center;
-      backdrop-filter: blur(10px);
+    .heart{
+      position:absolute;
+      bottom:-40px;
+      font-size:18px;
+      opacity:.9;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,.35));
+      animation: floatUp linear infinite;
     }
-    .ring{
-      width:74px; height:74px; border-radius:999px;
-      margin: 6px auto 10px;
-      border:6px solid rgba(255,255,255,.18);
-      border-top-color: rgba(255,255,255,.9);
-      animation: spin .9s linear infinite;
-    }
-    @keyframes spin { to{transform:rotate(360deg)} }
-
-    /* Hearts grid (4 cards) */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap:14px;
-      margin-top:12px;
-    }
-    .hcard{
-      border:1px solid var(--stroke);
-      background:rgba(255,255,255,.06);
-      border-radius:20px;
-      padding:18px 14px;
-      text-align:center;
-      cursor:pointer;
-      transition:.18s transform, .18s opacity;
-      min-height:110px;
-      display:grid;
-      place-items:center;
-    }
-    .hcard:hover{transform:translateY(-2px); opacity:.95}
-    .hicon{font-size:26px; margin-bottom:6px}
-    .hlabel{font-weight:800; font-size:16px}
-    .modal{
-      position:fixed; inset:0; z-index:200;
-      display:none; place-items:center;
-      background:rgba(0,0,0,.55);
-      padding:18px;
-    }
-    .modal.open{display:grid}
-    .modalBox{
-      width:min(560px, 92vw);
-      border-radius:22px;
-      border:1px solid var(--stroke);
-      background:rgba(20,12,42,.92);
-      box-shadow:var(--shadow);
-      padding:18px;
-      backdrop-filter: blur(10px);
-      text-align:center;
-    }
-    .modalTitle{font-weight:900; font-size:22px; margin:6px 0 10px}
-    .closeBtn{
-      border:1px solid var(--stroke);
-      background:rgba(255,255,255,.10);
-      color:#fff;
-      padding:10px 14px;
-      border-radius:14px;
-      cursor:pointer;
-      display:inline-block;
-      margin-top:12px;
+    @keyframes floatUp{
+      from{ transform: translateY(0) translateX(0) scale(1); opacity:0; }
+      10%{opacity:.9}
+      to{ transform: translateY(-120vh) translateX(40px) scale(1.15); opacity:0; }
     }
 
-    /* Gallery */
-    .gallery{
-      margin-top:16px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:14px;
+    /* app wrapper */
+    .wrap{
+      position:relative;
+      z-index:1;
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 18px 14px 110px;
     }
-    .gitem{
-      border:1px solid var(--stroke);
-      background:rgba(255,255,255,.06);
-      border-radius:22px;
+
+    /* glass cards */
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       overflow:hidden;
     }
-    .gimg{
-      width:100%;
-      height:min(360px, 52vw);
-      object-fit:cover;
-      display:block;
-      filter:saturate(1.05) contrast(1.02);
+    .soft{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
-    .gcap{
-      padding:12px 12px 14px;
-      color:rgba(255,255,255,.9);
-      line-height:1.9;
+
+    .center{
+      display:flex;
+      align-items:center;
+      justify-content:center;
       text-align:center;
     }
 
-    /* Music bar */
-    .musicBar{
-      position:fixed;
-      left:14px; right:14px; bottom:14px;
-      z-index:300;
-      border:1px solid var(--stroke);
-      background:rgba(0,0,0,.22);
-      backdrop-filter: blur(10px);
-      border-radius:18px;
-      box-shadow:var(--shadow);
-      padding:10px 12px;
+    /* screens */
+    .screen{
+      min-height: 100vh;
       display:flex;
       align-items:center;
-      gap:12px;
-      max-width:820px;
-      margin:0 auto;
+      justify-content:center;
+      padding: 28px 14px;
     }
-    .mBtn{
-      width:44px; height:44px;
-      border-radius:14px;
-      border:1px solid var(--stroke);
-      background:rgba(255,255,255,.10);
-      color:#fff;
+    .screenInner{
+      width:100%;
+      max-width: 430px;
+    }
+
+    .logoCircle{
+      width:66px; height:66px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      background: rgba(0,0,0,.35);
+      display:flex; align-items:center; justify-content:center;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .mail{
+      width: 28px; height: 28px;
+      display:block;
+      border: 2px solid var(--pink2);
+      border-radius: 6px;
+      position:relative;
+    }
+    .mail:before{
+      content:"";
+      position:absolute; inset:0;
+      border-top:2px solid var(--pink2);
+      transform: skewY(-18deg);
+      clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 0, 0 0);
+      opacity:.0;
+    }
+    .mail:after{
+      content:"";
+      position:absolute;
+      left:4px; right:4px; top:7px; height:0;
+      border-top:2px solid var(--pink2);
+      transform: rotate(0deg);
+      clip-path: polygon(0 0, 50% 90%, 100% 0);
+      opacity:1;
+    }
+
+    .title{
+      font-size: 40px;
+      margin: 0 0 8px;
+      letter-spacing: .5px;
+    }
+    .subtitle{
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* spinner ring like screenshot */
+    .ring{
+      width: 92px; height: 92px;
+      border-radius: 50%;
+      margin: 10px auto 16px;
+      border: 7px solid rgba(255,255,255,.15);
+      border-top-color: #6aa6ff;
+      border-right-color: var(--pink);
+      animation: spin 1.1s linear infinite;
+      position:relative;
+    }
+    .ring:after{
+      content:"❤";
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      font-size: 22px;
+      color: var(--pink2);
+      text-shadow: 0 10px 22px rgba(0,0,0,.45);
+    }
+    @keyframes spin{ to{ transform: rotate(360deg);} }
+
+    /* password */
+    .avatar{
+      width: 92px; height: 92px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      border: 2px solid rgba(255,255,255,.2);
+      overflow:hidden;
+      background: rgba(255,255,255,.08);
+    }
+    .avatar img{width:100%; height:100%; object-fit:cover}
+    .bigBtn{
+      width:100%;
+      padding: 14px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--text);
+      font-size: 18px;
       cursor:pointer;
+    }
+    .bigBtn:hover{ background: rgba(255,255,255,.10); }
+    .input{
+      width:100%;
+      padding: 16px 14px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--text);
+      outline:none;
+      font-size: 20px;
+      text-align:center;
+      letter-spacing: 6px;
+    }
+    .hint{
+      margin-top:10px;
+      font-size: 14px;
+      color: rgba(255,255,255,.75);
+    }
+    .shake{ animation: shake .38s ease; }
+    @keyframes shake{
+      0%,100%{transform:translateX(0)}
+      25%{transform:translateX(8px)}
+      50%{transform:translateX(-8px)}
+      75%{transform:translateX(6px)}
+    }
+
+    /* sections */
+    .section{
+      margin-top: 14px;
+      padding: 16px;
+    }
+    .section h2{
+      margin: 0 0 10px;
+      font-size: 26px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.12);
+      font-weight:600;
+    }
+
+    /* photo block */
+    .heroPhoto{
+      width:100%;
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+    }
+    .heroPhoto img{
+      width:100%;
+      height: 240px;
+      object-fit: cover;
+      display:block;
+    }
+    .caption{
+      padding: 12px 12px 14px;
+      text-align:center;
+      font-size: 18px;
+    }
+
+    /* counter */
+    .counterGrid{
       display:grid;
-      place-items:center;
-      font-size:18px;
-      flex:0 0 auto;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
     }
-    .mInfo{flex:1}
-    .mTitle{font-weight:900}
-    .mSub{color:var(--muted); font-size:12.5px; margin-top:2px}
-    .mRange{
-      width:180px;
-      max-width:32vw;
+    .counterItem{
+      padding: 12px 10px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      text-align:center;
     }
-    input[type="range"]{width:100%}
+    .counterItem .num{
+      font-size: 22px;
+      font-weight:800;
+      margin-bottom: 4px;
+    }
+    .counterItem .lab{
+      font-size: 12px;
+      color: rgba(255,255,255,.75);
+    }
+
+    /* love buttons */
+    .loveBtns{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .loveBtn{
+      padding: 14px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      text-align:center;
+      font-size: 18px;
+      color: var(--text);
+      cursor:pointer;
+      user-select:none;
+    }
+    .loveBtn span{ color: var(--pink2); margin: 0 6px; }
+    .toast{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 92px;
+      background: rgba(0,0,0,.55);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 10px 14px;
+      border-radius: 999px;
+      z-index: 20;
+      display:none;
+      max-width: 92vw;
+      text-align:center;
+    }
+
+    /* flip cards */
+    .grid2{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .flip{
+      perspective: 900px;
+    }
+    .flipInner{
+      width:100%;
+      height: 170px;
+      border-radius: 22px;
+      position:relative;
+      transform-style: preserve-3d;
+      transition: transform .75s cubic-bezier(.2,.85,.2,1);
+      cursor:pointer;
+    }
+    .flip.isFlipped .flipInner{ transform: rotateY(180deg); }
+    .face{
+      position:absolute; inset:0;
+      backface-visibility:hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding: 14px;
+    }
+    .front .icon{
+      display:flex; flex-direction:column; gap:10px;
+      align-items:center;
+      color: var(--text);
+      font-size: 18px;
+    }
+    .front .icon .h{
+      font-size: 34px;
+      color: var(--pink2);
+      text-shadow: 0 12px 30px rgba(0,0,0,.45);
+    }
+    .back{
+      transform: rotateY(180deg);
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(255,255,255,.92);
+    }
+
+    /* gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .gItem{
+      border-radius: 22px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+    }
+    .gItem img{
+      width:100%;
+      height: 240px;
+      object-fit: cover;
+      display:block;
+    }
+    .gCap{
+      padding: 12px;
+      text-align:center;
+      font-size: 17px;
+      color: rgba(255,255,255,.92);
+    }
+
+    /* music mini player */
+    .player{
+      position:fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 14px;
+      width: min(430px, calc(100% - 18px));
+      z-index: 15;
+      padding: 12px 12px;
+      border-radius: 22px;
+      background: rgba(0,0,0,.45);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+      display:flex;
+      align-items:center;
+      gap: 12px;
+    }
+    .pAvatar{
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      flex: 0 0 auto;
+    }
+    .pAvatar img{ width:100%; height:100%; object-fit:cover; }
+    .pInfo{ flex:1; min-width:0; }
+    .pTitle{
+      font-size: 14px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .bar{
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.15);
+      overflow:hidden;
+      margin-top: 6px;
+    }
+    .bar > div{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, #6aa6ff, var(--pink));
+    }
+    .pBtn{
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 16px;
+      flex: 0 0 auto;
+    }
+
+    /* modal */
+    .modalOverlay{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      z-index: 50;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+    }
+    .modal{
+      width: min(430px, 100%);
+      border-radius: 26px;
+      overflow:hidden;
+      background: rgba(10,10,22,.85);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 30px 90px rgba(0,0,0,.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .modalTop{
+      padding: 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background: linear-gradient(90deg, rgba(255,79,163,.20), rgba(110,100,255,.18));
+    }
+    .modalTop .x{
+      width:38px; height:38px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      cursor:pointer;
+      font-size: 18px;
+    }
+    .modalBody{
+      padding: 18px 18px 22px;
+      text-align:center;
+      line-height: 1.9;
+      color: rgba(255,255,255,.95);
+      font-size: 18px;
+    }
+    .modalBody .mTitle{ font-size: 22px; margin: 0 0 10px; }
+    .modalBody .ok{
+      margin-top: 14px;
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      cursor:pointer;
+      font-size: 16px;
+    }
+
+    .footer{
+      margin-top: 16px;
+      text-align:center;
+      font-size: 12px;
+      color: rgba(255,255,255,.55);
+    }
   </style>
 </head>
+
 <body>
-  <div class="hearts"></div>
 
-  <!-- Loading -->
-  <div id="loading" class="loading">
-    <div class="loaderCard">
+  <div class="hearts" id="hearts"></div>
+
+  <!-- Screen 1 -->
+  <section class="screen" id="screen1">
+    <div class="screenInner card" style="padding:22px;">
       <div class="ring"></div>
-      <div style="font-weight:800;font-size:20px;margin-top:6px">جاري التحميل…</div>
-      <div style="color:rgba(255,255,255,.72);margin-top:6px">لحظة حب صغيرة 💗</div>
+      <p class="subtitle" style="text-align:center; font-size:18px;">جاري التحميل</p>
+      <div style="display:flex; justify-content:center; gap:8px; margin-top:10px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#6aa6ff;display:inline-block;"></span>
+        <span style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);display:inline-block;"></span>
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--pink);display:inline-block;"></span>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="wrap" style="opacity:0" id="app">
-    <div class="card">
-      <div class="topRight" onclick="go('home')" title="رجوع">✕</div>
+  <!-- Screen 2 -->
+  <section class="screen hidden" id="screen2">
+    <div class="screenInner card" style="padding:22px;">
+      <div class="ring"></div>
+      <p class="subtitle" style="text-align:center; font-size:18px;">ثواني بس يا روحي 😂❤️✨</p>
+      <div style="display:flex; justify-content:center; gap:8px; margin-top:10px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#6aa6ff;display:inline-block;"></span>
+        <span style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);display:inline-block;"></span>
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--pink);display:inline-block;"></span>
+      </div>
+    </div>
+  </section>
 
-      <!-- 1) الرئيسية -->
-      <section id="home" class="screen active">
-        <div class="pill">✨ <span>غادة</span> ❤️</div>
-        <div class="title">غادة</div>
-        <p class="sub">في ناس وجودهم بيخلّي كل حاجة أهدى… وإنتِ منهم 🤍</p>
+  <!-- Screen 3 Password -->
+  <section class="screen hidden" id="screen3">
+    <div class="screenInner card" style="padding:22px;">
+      <div class="avatar">
+        <!-- غيّر الصورة دي لو حابب -->
+        <img src="p1.jpg" alt="avatar" onerror="this.style.display='none'">
+      </div>
+      <h1 class="title" style="text-align:center; margin-top:0;">غادة</h1>
+      <p class="subtitle" style="text-align:center; margin-bottom:16px;">
+        ❤️ كل اللي هنا هيفضل بيني وبينك طول العمر
+      </p>
 
-        <div class="row">
-          <div class="btn" onclick="go('firstMeet')">❤️ أول مرة اتقابلنا</div>
-          <div class="btn" onclick="go('password')">🔒 رسالة سرّية</div>
+      <input class="input" id="pass" type="password" inputmode="numeric" placeholder="الباسورد" />
+      <button class="bigBtn" id="openBtn" style="margin-top:12px;">يلا بسرعة افتحي 😂❤️</button>
+      <div class="hint" style="text-align:center;">(الباسورد: 1234)</div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="wrap hidden" id="main">
+
+    <!-- 1) First meet -->
+    <div class="section card">
+      <h2 style="text-align:center; margin-bottom:10px;">❤️ يوم ما عرفنا بعض كان يوم ولادتي</h2>
+      <div class="soft" style="padding:14px; text-align:center;">
+        <div style="font-size:18px; margin-bottom:10px;">❤️ اول مرة اتقابلنا</div>
+        <div class="pill" style="justify-content:center;">
+          <span>📅</span>
+          <span id="startDateLabel">2025-09-10</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2) Counter -->
+    <div class="section card">
+      <h2 style="text-align:center;">❤️ بداية عمري معاكي</h2>
+      <div class="soft" style="padding:14px;">
+        <div style="text-align:center; color:rgba(255,255,255,.85); margin-bottom:10px;">
+          ❤️ هيفضل شغال طول ما احنا مع بعض
         </div>
 
-        <p class="small">وتحت كمان هتلاقي قلوب وصور… انزلي شوية 😉</p>
+        <div class="counterGrid" id="counter">
+          <div class="counterItem"><div class="num" id="cYears">0</div><div class="lab">سنة</div></div>
+          <div class="counterItem"><div class="num" id="cMonths">0</div><div class="lab">شهر</div></div>
+          <div class="counterItem"><div class="num" id="cDays">0</div><div class="lab">يوم</div></div>
+          <div class="counterItem"><div class="num" id="cHours">0</div><div class="lab">ساعة</div></div>
+          <div class="counterItem"><div class="num" id="cMins">0</div><div class="lab">دقيقة</div></div>
+          <div class="counterItem"><div class="num" id="cSecs">0</div><div class="lab">ثانية</div></div>
+        </div>
+      </div>
+    </div>
 
-        <hr style="border:none;border-top:1px solid rgba(255,255,255,.12); margin:18px 0">
+    <!-- 3) Love buttons -->
+    <div class="section card">
+      <h2 style="text-align:center;">😂 اقفي هنا شوية متجريش</h2>
+      <div class="loveBtns">
+        <div class="loveBtn" data-toast="بحبك يا غادة ❤️">♡ <span>بحبك</span> ♡</div>
+        <div class="loveBtn" data-toast="بموت فيكي يا روحي ✨❤️">✨ <span>بموت فيكي</span> ✨</div>
+        <div class="loveBtn" data-toast="بعشقك… ومش هعرف أبطل ❤️🔒">🔒 <span>بعشقك</span> 🔒</div>
+      </div>
+    </div>
 
-        <!-- قلوب مربعة زي الفيديو -->
-        <div class="title" style="font-size:22px;margin:0 0 8px">اختاري قلب 💘</div>
-        <p class="sub" style="margin-bottom:10px">كل قلب وراه كلمة حلوة ليكي</p>
-
-        <div class="grid">
-          <div class="hcard" onclick="openHeart('الأول ❤️','إنتِ أجمل صدفة حصلت في حياتي… ووجودك بيطمنّي.')">
-            <div>
-              <div class="hicon">💗</div>
-              <div class="hlabel">الأول</div>
+    <!-- 4) Flip cards -->
+    <div class="section card">
+      <h2 style="text-align:center;">😉 دوسي على الكروت</h2>
+      <div class="grid2">
+        <div class="flip">
+          <div class="flipInner">
+            <div class="face front">
+              <div class="icon">
+                <div class="h">♡</div>
+                <div>محبتش</div>
+              </div>
+            </div>
+            <div class="face back">
+              لا… أنا حبيتك من أول نظرة 🥺❤️  
+              ومن ساعتها وانتي بقيتي “حياتي”.
             </div>
           </div>
+        </div>
 
-          <div class="hcard" onclick="openHeart('التاني ✨','أنا بحب تفاصيلك… طريقة كلامك… وضحكتك اللي بتفتح النفس.')">
-            <div>
-              <div class="hicon">💞</div>
-              <div class="hlabel">التاني</div>
+        <div class="flip">
+          <div class="flipInner">
+            <div class="face front">
+              <div class="icon">
+                <div class="h">♡</div>
+                <div>ولا بحب</div>
+              </div>
             </div>
-          </div>
-
-          <div class="hcard" onclick="openHeart('التالت 🤍','ربنا يديمك نعمة… ويخلي بينا الود دايمًا، مهما الأيام اتغيرت.')">
-            <div>
-              <div class="hicon">💖</div>
-              <div class="hlabel">التالت</div>
-            </div>
-          </div>
-
-          <div class="hcard" onclick="openHeart('الرابع 🌙','إنتِ مش بس حُب… إنتِ راحة… وسكينة… وأمان.')">
-            <div>
-              <div class="hicon">💘</div>
-              <div class="hlabel">الرابع</div>
+            <div class="face back">
+              أنا مش “بحب” وبس…  
+              ده انتي الإحساس اللي بيطمنني كل يوم ❤️
             </div>
           </div>
         </div>
 
-        <hr style="border:none;border-top:1px solid rgba(255,255,255,.12); margin:18px 0">
-
-        <!-- صور تحت -->
-        <div class="title" style="font-size:22px;margin:0 0 8px">صورنا 📸</div>
-        <p class="sub" style="margin-bottom:10px">لحظات صغيرة… بس غالية عندي جدًا</p>
-
-        <div class="gallery">
-          <!-- غيّر أسماء الصور حسب اللي رفعتها -->
-          <div class="gitem">
-            <img class="gimg" src="p1.jpg" alt="photo 1">
-            <div class="gcap">في كل صورة لينا… بحس إن الدنيا أحن 🤍</div>
-          </div>
-
-          <div class="gitem">
-            <img class="gimg" src="p2.jpg" alt="photo 2">
-            <div class="gcap">ضحكتك هنا… كانت كفاية تخلّي اليوم كله عيد ❤️</div>
-          </div>
-
-          <div class="gitem">
-            <img class="gimg" src="p3.jpg" alt="photo 3">
-            <div class="gcap">أنا بحب إننا “إحنا”… وبس 💗</div>
+        <div class="flip">
+          <div class="flipInner">
+            <div class="face front">
+              <div class="icon">
+                <div class="h">♡</div>
+                <div>ولا هحب حد</div>
+              </div>
+            </div>
+            <div class="face back">
+              مهما الدنيا لفت…  
+              انتي آخر وأحلى اختيار ❤️✨
+            </div>
           </div>
         </div>
 
-      </section>
-
-      <!-- 2) تاريخ أول مرة -->
-      <section id="firstMeet" class="screen">
-        <div class="title">أول مرة اتقابلنا</div>
-        <div class="note">
-          <div>📅 <b>10/9/2025</b></div>
-          <div style="margin-top:10px">
-            اليوم ده كان بداية لطريق حلو…<br/>
-            من ساعتها وأنا بحس إن في “تفاصيل” بتتحسن لمجرد إنك موجودة ❤️
+        <div class="flip">
+          <div class="flipInner">
+            <div class="face front">
+              <div class="icon">
+                <div class="h">♡</div>
+                <div>الرابع</div>
+              </div>
+            </div>
+            <div class="face back">
+              الرابع ده مخصوص…  
+              عشان أقولك: أنا فخور بيكي دايمًا ❤️🥰
+            </div>
           </div>
         </div>
-        <div class="row" style="margin-top:14px">
-          <div class="btn" onclick="go('home')">↩ رجوع</div>
-          <div class="btn" onclick="go('password')">🔒 روحي للرسالة</div>
-        </div>
-      </section>
-
-      <!-- 3) الباسورد + الرسالة -->
-      <section id="password" class="screen">
-        <div class="title">جاهزة؟ ✨</div>
-        <p class="sub">اكتبي الباسورد علشان تفتحي الرسالة</p>
-
-        <input id="pw" class="input" type="password" inputmode="numeric" placeholder="الباسورد" />
-
-        <div class="row" style="margin-top:12px">
-          <div class="btn" onclick="checkPw()">افتحي الرسالة 💌</div>
-          <div class="btn" onclick="go('home')">↩ رجوع</div>
-        </div>
-
-        <p id="pwErr" class="small" style="color:#ffd1e7; display:none;">الباسورد غلط 🙈 جرّبي تاني</p>
-
-        <div id="letter" style="display:none; margin-top:14px" class="note">
-          غادة… ❤️<br/>
-          يمكن الكلام عمره ما هيقدر يلمّ كل اللي جوايا، بس أكيد يقدر يقول حاجة مهمة:<br/>
-          إنتِ غالية… وقريبة… ووجودك بيطمنّي.<br/><br/>
-          أنا ممتن لكل لحظة جمعتنا، ولكل مرة ضحكنا فيها من القلب…<br/>
-          وربنا يديمك نعمة في حياتي، ويديم بينا الود والفرح دايمًا 🤍
-        </div>
-      </section>
-
+      </div>
     </div>
+
+    <!-- 5) Gallery -->
+    <div class="section card">
+      <h2 style="text-align:center;">👇 حياتي باختصار هنا</h2>
+      <div class="gallery">
+
+        <div class="gItem">
+          <img src="p1.jpg" alt="p1">
+          <div class="gCap">الصورة دي بتفكرني إن حضنك هو الأمان ❤️</div>
+        </div>
+
+        <div class="gItem">
+          <img src="p2.jpg" alt="p2">
+          <div class="gCap">ضحكتك… هي أحلى حاجة في يومي 🥺✨</div>
+        </div>
+
+        <div class="gItem">
+          <img src="p3.jpg" alt="p3">
+          <div class="gCap">كل مرة بشوفك بحس إني كسبت الدنيا ❤️</div>
+        </div>
+
+        <div class="gItem">
+          <img src="p4.jpg" alt="p4">
+          <div class="gCap">لو رجع بيا الزمن… هختارك تاني ❤️</div>
+        </div>
+
+        <div class="gItem">
+          <img src="p5.jpg" alt="p5">
+          <div class="gCap">وأهو ده وعد مني: هفضل جنبك طول العمر ❤️</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 6) Final secret button -->
+    <div class="section card" style="text-align:center;">
+      <button class="bigBtn" id="secretBtn" style="display:flex;justify-content:center;gap:10px;align-items:center;">
+        🔒 لسه مخلصتش دوسي هنا 😂❤️
+      </button>
+
+      <div class="footer">❤️ Designed with love</div>
+    </div>
+
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Music player -->
+  <div class="player hidden" id="player">
+    <div class="pAvatar"><img src="p1.jpg" alt="cover" onerror="this.style.display='none'"></div>
+    <div class="pInfo">
+      <div class="pTitle">اغنيتنا ❤️ <span style="opacity:.7">• تشغيل الآن…</span></div>
+      <div class="bar"><div id="barFill"></div></div>
+    </div>
+    <button class="pBtn" id="playBtn" aria-label="play">▶</button>
+    <audio id="audio" src="song.mp3" preload="auto"></audio>
   </div>
 
-  <!-- Modal for hearts -->
-  <div id="modal" class="modal" onclick="closeModal(event)">
-    <div class="modalBox">
-      <div id="mTitle" class="modalTitle"></div>
-      <div id="mText" class="note" style="margin-top:10px"></div>
-      <div class="closeBtn" onclick="closeModal()">إغلاق</div>
+  <!-- Modal -->
+  <div class="modalOverlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modalTop">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="logoCircle" style="width:44px;height:44px;margin:0;">
+            <div class="mail"></div>
+          </div>
+          <div style="font-weight:700;">غادة</div>
+        </div>
+        <button class="x" id="closeModal">✕</button>
+      </div>
+      <div class="modalBody">
+        <div class="mTitle">رسالة أخيرة ❤️</div>
+        <div>
+          أنا مش عامل صفحة… أنا عامل “وعد”.<br>
+          إنك مهما تعبتي أو اتلخبطي… تفتحي اللينك ده وتفتكري إن في حد بيحبك بجد.<br>
+          ربنا ما يحرمنيش منك أبدًا يا روحي… ويارب العمر كله مع بعض ❤️
+        </div>
+        <button class="ok" id="okModal">إغلاق</button>
+      </div>
     </div>
   </div>
-
-  <!-- Music bar -->
-  <div class="musicBar">
-    <button id="playBtn" class="mBtn" title="تشغيل/إيقاف">▶</button>
-    <div class="mInfo">
-      <div class="mTitle">موسيقى صغيرة 🎶</div>
-      <div class="mSub">اضغطي تشغيل… وخلي اللحظة أحلى</div>
-    </div>
-    <div class="mRange">
-      <input id="vol" type="range" min="0" max="100" value="70" />
-    </div>
-  </div>
-
-  <audio id="audio" src="song.mp3" preload="auto"></audio>
 
   <script>
-    const SECRET = "1234";
+    // ====== CONFIG ======
+    const PASSWORD = "1234";
+    // تاريخ البداية: 10/9/2025 (DD/MM/YYYY)
+    const START_DD = 10, START_MM = 9, START_YYYY = 2025;
 
-    // Loading effect
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const loading = document.getElementById('loading');
-        const app = document.getElementById('app');
-        loading.style.opacity = '0';
-        app.style.opacity = '1';
-        setTimeout(() => loading.remove(), 400);
-      }, 1200);
+    // ====== Hearts background ======
+    (function makeHearts(){
+      const box = document.getElementById("hearts");
+      const emojis = ["❤","💗","💖","💞","💕"];
+      const count = 22;
+      for(let i=0;i<count;i++){
+        const s = document.createElement("div");
+        s.className = "heart";
+        s.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        s.style.left = Math.random()*100 + "vw";
+        s.style.animationDuration = (8 + Math.random()*8) + "s";
+        s.style.animationDelay = (-Math.random()*10) + "s";
+        s.style.fontSize = (14 + Math.random()*18) + "px";
+        s.style.opacity = (0.35 + Math.random()*0.55);
+        box.appendChild(s);
+      }
+    })();
+
+    // ====== Intro screens timing ======
+    const s1 = document.getElementById("screen1");
+    const s2 = document.getElementById("screen2");
+    const s3 = document.getElementById("screen3");
+
+    setTimeout(()=>{ s1.classList.add("hidden"); s2.classList.remove("hidden"); }, 1600);
+    setTimeout(()=>{ s2.classList.add("hidden"); s3.classList.remove("hidden"); }, 3200);
+
+    // ====== Password gate ======
+    const pass = document.getElementById("pass");
+    const openBtn = document.getElementById("openBtn");
+    const main = document.getElementById("main");
+    const player = document.getElementById("player");
+
+    function openContent(){
+      const v = (pass.value || "").trim();
+      if(v !== PASSWORD){
+        const card = pass.closest(".card");
+        card.classList.remove("shake");
+        void card.offsetWidth;
+        card.classList.add("shake");
+        pass.value = "";
+        pass.focus();
+        return;
+      }
+      // show content
+      document.getElementById("screen3").classList.add("hidden");
+      main.classList.remove("hidden");
+      player.classList.remove("hidden");
+      // حاول تشغل الأغنية (بعض الموبايلات لازم المستخدم يدوس Play)
+      setTimeout(()=>{ tryPlay(); }, 350);
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    openBtn.addEventListener("click", openContent);
+    pass.addEventListener("keydown", (e)=>{ if(e.key==="Enter") openContent(); });
+
+    // ====== Start date label ======
+    const pad2 = (n)=> String(n).padStart(2,"0");
+    const iso = `${START_YYYY}-${pad2(START_MM)}-${pad2(START_DD)}`;
+    document.getElementById("startDateLabel").textContent = iso;
+
+    // ====== Live counter ======
+    const startDate = new Date(START_YYYY, START_MM-1, START_DD, 0,0,0);
+    function updateCounter(){
+      const now = new Date();
+
+      // فرق بالأجزاء (سنين/شهور/أيام...) بطريقة تقويمية
+      let y = now.getFullYear() - startDate.getFullYear();
+      let m = now.getMonth() - startDate.getMonth();
+      let d = now.getDate() - startDate.getDate();
+
+      if(d < 0){
+        m -= 1;
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+        d += prevMonth;
+      }
+      if(m < 0){
+        y -= 1;
+        m += 12;
+      }
+
+      // ساعات/دقايق/ثواني من فرق الوقت في نفس اليوم
+      const base = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0,0,0);
+      const msDay = now - base;
+      const hours = Math.floor(msDay / (1000*60*60));
+      const mins = Math.floor((msDay % (1000*60*60)) / (1000*60));
+      const secs = Math.floor((msDay % (1000*60)) / 1000);
+
+      document.getElementById("cYears").textContent = Math.max(0,y);
+      document.getElementById("cMonths").textContent = Math.max(0,m);
+      document.getElementById("cDays").textContent = Math.max(0,d);
+      document.getElementById("cHours").textContent = hours;
+      document.getElementById("cMins").textContent = mins;
+      document.getElementById("cSecs").textContent = secs;
+    }
+    setInterval(updateCounter, 1000);
+    updateCounter();
+
+    // ====== Love buttons -> toast ======
+    const toast = document.getElementById("toast");
+    function showToast(text){
+      toast.textContent = text;
+      toast.style.display = "block";
+      clearTimeout(showToast.t);
+      showToast.t = setTimeout(()=> toast.style.display="none", 1700);
+    }
+    document.querySelectorAll(".loveBtn").forEach(btn=>{
+      btn.addEventListener("click", ()=> showToast(btn.dataset.toast || "❤️"));
     });
 
-    function go(id){
-      document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+    // ====== Flip cards ======
+    document.querySelectorAll(".flip").forEach(el=>{
+      el.addEventListener("click", ()=>{
+        el.classList.toggle("isFlipped");
+      });
+    });
 
-      const err = document.getElementById('pwErr');
-      if(err) err.style.display = 'none';
-      const letter = document.getElementById('letter');
-      if(letter) letter.style.display = 'none';
-      const pw = document.getElementById('pw');
-      if(pw) pw.value = "";
+    // ====== Modal secret ======
+    const modalOverlay = document.getElementById("modalOverlay");
+    const secretBtn = document.getElementById("secretBtn");
+    const closeModal = document.getElementById("closeModal");
+    const okModal = document.getElementById("okModal");
+
+    function openModal(){ modalOverlay.style.display="flex"; }
+    function hideModal(){ modalOverlay.style.display="none"; }
+
+    secretBtn.addEventListener("click", openModal);
+    closeModal.addEventListener("click", hideModal);
+    okModal.addEventListener("click", hideModal);
+    modalOverlay.addEventListener("click", (e)=>{ if(e.target===modalOverlay) hideModal(); });
+
+    // ====== Music player ======
+    const audio = document.getElementById("audio");
+    const playBtn = document.getElementById("playBtn");
+    const barFill = document.getElementById("barFill");
+
+    function setPlayIcon(){
+      playBtn.textContent = audio.paused ? "▶" : "❚❚";
     }
-
-    function checkPw(){
-      const v = (document.getElementById('pw').value || "").trim();
-      if(v === SECRET){
-        document.getElementById('pwErr').style.display = 'none';
-        document.getElementById('letter').style.display = 'block';
-      } else {
-        document.getElementById('pwErr').style.display = 'block';
-        document.getElementById('letter').style.display = 'none';
-      }
-    }
-
-    // Hearts modal
-    function openHeart(title, text){
-      document.getElementById('mTitle').textContent = title;
-      document.getElementById('mText').textContent = text;
-      document.getElementById('modal').classList.add('open');
-    }
-    function closeModal(e){
-      // لو ضغط على الخلفية (مش الصندوق) يقفل
-      if(!e || e.target.id === 'modal'){
-        document.getElementById('modal').classList.remove('open');
-      }
-    }
-
-    // Music controls
-    const audio = document.getElementById('audio');
-    const playBtn = document.getElementById('playBtn');
-    const vol = document.getElementById('vol');
-
-    audio.volume = 0.7;
-
-    playBtn.addEventListener('click', async () => {
+    async function tryPlay(){
       try{
-        if(audio.paused){
-          await audio.play();
-          playBtn.textContent = "⏸";
-        }else{
-          audio.pause();
-          playBtn.textContent = "▶";
-        }
-      }catch(err){
-        alert("لو الموبايل منع التشغيل التلقائي: اضغطي زر التشغيل مرة كمان 😊");
+        await audio.play();
+      }catch(e){
+        // عادي: بعض المتصفحات تمنع التشغيل تلقائي
+      }
+      setPlayIcon();
+    }
+
+    playBtn.addEventListener("click", async ()=>{
+      if(audio.paused){
+        await tryPlay();
+      }else{
+        audio.pause();
+        setPlayIcon();
       }
     });
 
-    vol.addEventListener('input', () => {
-      audio.volume = (Number(vol.value) / 100);
+    audio.addEventListener("timeupdate", ()=>{
+      if(!audio.duration) return;
+      const p = (audio.currentTime / audio.duration) * 100;
+      barFill.style.width = p.toFixed(1) + "%";
     });
-
-    audio.addEventListener('ended', () => {
-      playBtn.textContent = "▶";
+    audio.addEventListener("ended", ()=>{
+      audio.currentTime = 0;
+      setPlayIcon();
     });
+    audio.addEventListener("play", setPlayIcon);
+    audio.addEventListener("pause", setPlayIcon);
   </script>
 </body>
 </html>
